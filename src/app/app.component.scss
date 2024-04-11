@@ -1,0 +1,290 @@
+$light-blue: #007bff;
+$dark-blue: #0047AB;
+
+.invitation-page {
+    background: whitesmoke;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    font-family: 'Helvetica', sans-serif;
+
+    .text {
+      color: $light-blue;
+    }
+    
+    h1 {
+      color: $dark-blue; // Intense blue
+      margin-top: 0;
+    }
+  
+    h2 {
+      font-family: 'Dancing Script', cursive; // Przykładowa czcionka przypominająca pismo ręczne
+      color: $dark-blue;
+      margin: 1rem 0;
+      font-size: xx-large;
+    }
+
+    .written-text {
+      display: inline-block; /* Or block depending on your layout */
+      white-space: nowrap; /* Keeps the text in one line */
+      overflow: hidden; /* Hides the part of the text that exceeds the container's width */
+      // border-right: 2px solid; /* Simulates the text cursor; adjust as needed */
+      width: 0; /* Start width at 0 so the text is initially hidden */
+      animation: write 3s steps(40, end) forwards; /* Adjust timing and steps as needed */
+    }
+    
+    @keyframes write {
+      from {
+        width: 0;
+      }
+      to {
+        width: 20%; /* Animate to full width */
+      }
+    }
+    
+  
+    .date {
+      font-size: 1.25rem;
+      color: $dark-blue;
+      margin-bottom: 2rem;
+    }
+
+    .video {
+        padding-top: 20px;
+    }
+
+    .description {
+      background-color: #0047ab94;
+      margin: auto;
+      padding: 20px;
+      width: 80%;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      max-width: 200px;
+    }
+    
+    .map-card-image {
+      width: 80px; /* Adjust based on your preference */
+      height: 80px; /* Adjust based on your preference */
+      background-size: cover; /* Cover the entire area; use contain for no cropping */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      border-radius: 50%; /* Optional: for round images */
+    }
+    
+    .map-card-headline {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .map-card-description {
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      color: $light-blue;
+      font-style: italic;
+    }
+    
+    .map-card-link {
+      color: #007bff; /* Blue color for the link */
+      text-decoration: underline; /* Removes underline */
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: none; /* Adds underline on hover */
+      }
+    }
+    
+  
+    .location ul, .schedule .event {
+      background-color: #0047ab94;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .location {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .location-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .location-list {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .location-map {
+      padding: 0 20px; /* Add some padding for spacing, adjust as needed */
+      width: 80%;
+    }
+    
+  
+    .location h3, .schedule h3 {
+      color: $dark-blue;
+    }
+  
+    .event {
+      margin-bottom: 1rem;
+      text-align: left;
+      
+  
+      .event-date {
+        font-weight: bold;
+      }
+    }
+
+    .card {
+      margin: 0 10%;
+    }
+
+    .bottom-right-corner {
+      position: fixed; /* Fixed positioning relative to the viewport */
+      right: 10px; /* Distance from the right edge of the viewport */
+      bottom: 10px; /* Distance from the bottom edge of the viewport */
+      padding: 5px;
+      border-radius: 5px; /* Rounded corners */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional shadow for depth */
+      z-index: 1000; /* Ensure it stays on top of other content */
+    }
+
+    section {
+      form {
+        margin-top: 20px;
+
+        .form-label {
+          color: $light-blue; // Makes label text blue
+          font-weight: bold; // Optionally makes the text bold
+          margin-bottom: 10px;
+          font-size: x-large;
+        }
+
+        .form-header {
+          color: $light-blue; 
+        }
+
+        .p-fluid {
+          max-width: 600px; // Sets a max-width for the form for a modern look
+          margin: auto; // Centers the form in the section
+    
+          .p-field, .p-field-radiobutton {
+            text-align: left; // Aligns label and input text to the left
+            margin-bottom: 1rem; // Adds space between each field
+    
+            label, div {
+              color: $light-blue; // Makes label text blue
+              font-weight: bold; // Optionally makes the text bold
+              margin-bottom: 10px;
+            }
+    
+            input {
+              width: 100%; // Makes input fields take up full width of their container
+              padding: 0.5rem; // Adds padding inside input fields for better readability
+              border: 1px solid #ced4da; // Gives a subtle border to input fields
+              border-radius: 0.25rem; // Adds slight rounding to the corners of the input fields
+    
+              &:focus {
+                border-color: #80bdff; // Changes border color on focus for a modern effect
+                outline: 0; // Removes default focus outline
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); // Adds a subtle "glow" effect on focus
+              }
+            }
+    
+            // Style for the disabled submit button to make it visually distinct
+            button:disabled {
+              background-color: #6c757d; // Changes background color for disabled state
+              cursor: not-allowed; // Changes cursor to indicate the button is disabled
+            }
+          }
+    
+          // Styling for the submit button
+          button {
+            background-color: $light-blue; // Sets button background color
+            color: white; // Sets button text color to white
+            padding: 0.5rem 1rem; // Adds padding around the button text
+            border: none; // Removes the border
+            border-radius: 0.25rem; // Rounds the corners of the button
+            font-size: 1rem; // Sets font size
+            cursor: pointer; // Changes cursor to pointer when hovering over the button
+    
+            &:hover {
+              background-color: #0056b3; // Darkens the button on hover for a visual effect
+            }
+          }
+        }
+      }
+    }
+    
+  }
+
+  :host {
+    ::ng-deep {
+      .p-field-radiobutton label, .p-field-checkbox label {
+        color: $light-blue; /* Blue color for the labels */
+        font-weight: bold; /* Makes the text bold */
+      }
+
+      .p-radiobutton {
+        margin-left: 10px;
+
+      }
+      
+      input::placeholder, textarea::placeholder {
+        font-style: italic; /* Ustawia tekst placeholdera na kursywę */
+        opacity: 0.5;
+      }
+
+      .p-field-checkbox {
+        display: flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+  
+      .p-field label {
+        color: $light-blue; /* Blue color for the labels */
+        font-weight: bold; /* Makes the text bold */
+      }
+  
+      textarea[pInputTextarea] {
+        width: 100%; /* Ensures the textarea takes the full width */
+        padding: 0.5rem; /* Adds some padding inside the textarea */
+        border: 1px solid #ced4da; /* A subtle border for the textarea */
+        border-radius: 0.25rem; /* Slightly rounded corners for the textarea */
+      
+        &:focus {
+          border-color: #80bdff; /* Changes border color on focus */
+          outline: 0; /* Removes the default focus outline */
+          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Adds a subtle 'glow' effect on focus */
+        }
+      }
+      
+      /* Style adjustments for the radio buttons and checkbox to improve alignment */
+      .p-radiobutton .p-radiobutton-label, .p-checkbox .p-checkbox-label {
+        vertical-align: middle; /* Centers the label text vertically with the radio/checkbox */
+        margin-left: 0.5rem; /* Adds a little space between the radio/checkbox and the label */
+      }
+    }
+  }
+  
+  
