@@ -41,7 +41,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       iconUrl: '/assets/party-marker.png', // The URL to your marker image
       iconSize: [50, 55], // Size of the icon
       iconAnchor: [22, 94], // Point of the icon which will correspond to marker's location
-      popupAnchor: [-3, -76] // Point from which the popup should open relative to the iconAnchor
+      popupAnchor: [-3, -76]
     });
 
     L.marker([WEDDING_LATITUDE, WEDDING_LONGITUDE], { icon: weddingMarker }).addTo(map)
