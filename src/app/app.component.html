@@ -1,46 +1,80 @@
+<link href='https://fonts.googleapis.com/css?family=Great Vibes' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<p-toast />
+<p-confirmDialog />
 <div class="invitation-page">
-  <h1>POBIERAMY SIĘ!</h1>
-  <div class="written-text">
-    <h2>Julia & Krystian</h2>
+  <div class="custom-container">
+    <img src="assets/greece-flag-15.gif" alt="Flag" class="flag">
+    <nav>
+      <a href="#section1" (click)="scrollToSection($event, 'section1')">Organizacja</a>
+      <a href="#section2" (click)="scrollToSection($event, 'section2')">Harmonogram</a>
+      <a href="#section3" (click)="scrollToSection($event, 'section3')">Formularz</a>
+    </nav>
   </div>
-  <p class="date">09.05.2025</p>
-  <div class="date">
-    Do ślubu pozostało: {{ countdown?.days }} dni {{ countdown?.hours }} godzin {{ countdown?.minutes }} minut {{ countdown?.seconds }} sekund
+  <div class="cover">
+    <img [src]="screenWidth > 500 ? desktopImg : mobileImg" alt="Logo">
   </div>
-  <p class="description">
-    Mamy zaszczyt zaprosić Was na nasze wesele, które odbędzie się w pięknej Grecji. Będzie nam niezmiernie miło gościć Was w tym wyjątkowym dniu!
-  </p>
+  <div class="h1 written-text">Pobieramy się!</div>
+  <div class="date">09.05.2025</div>
+  <div class="countdown-container">
+    <div class="h2">Do ślubu zostało:</div>
+    <div class="countdown-area">
+      <div class="countdown">
+        <div class="orange-rectangle">{{ countdown?.days }} dni</div>
+        <div class="countdown-segment">
+          <span class="countdown-number">{{ countdown!.hours > 9 ? countdown?.hours : '0' + countdown?.hours }}</span>
+        </div>
+        <div class="countdown-colon">:</div>
+        <div class="countdown-segment">
+          <span class="countdown-number">{{ countdown!.minutes > 9 ? countdown?.minutes : '0' + countdown?.minutes }}</span>
+        </div>
+        <div class="countdown-colon">:</div>
+        <div class="countdown-segment">
+          <span class="countdown-number">{{ countdown!.seconds > 9 ? countdown?.seconds : '0' + countdown?.seconds }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="description">
+    Mamy zaszczyt zaprosić Was na nasze wesele, które odbędzie się w pięknej Grecji.
+    <br><br>
+    Będzie nam niezmiernie miło gościć Was w tym wyjątkowym dniu!
+  </div>
   <div class="video" [innerHtml]="safeUrl"></div>
 
-  <section class="location">
-    <h3>Co i jak?</h3>
+  <div id="section1" class="section location">
+    <div class="h2">Organizacja</div>
     <div class="location-content">
       <div class="location-list">
-        <div *ngFor="let item of mapItems" class="map-card">
+        <div *ngFor="let item of mapItems" class="map-card" (click)="onItemSelect(item)">
           <div [style.background-image]="'url(' + item.icon + ')'" class="map-card-image"></div>
-          <h3 class="map-card-headline">{{ item.name }}</h3>
-          <p class="map-card-description">{{ item.description }}</p>
-          <a [href]="item.url" class="map-card-link">Poczytaj więcej</a>
+          <div class="h2">{{ item.name }}</div>
+          <div class="extension">{{ item.extension }}</div>
+          <div class="description">{{ item.description }}</div>
+          <a *ngIf="item.address" [href]="item.google" class="description" target="_blank">{{ item.address }}</a>
+          <a [href]="item.url" class="map-card-link" target="_blank">Zobacz szczegóły</a>
         </div>
       </div>
       <div class="location-map">
-        <app-map-component></app-map-component>
+        <app-map-component [selectedItem]="selectedLocation | async"></app-map-component>
       </div>
     </div>
-  </section>
+  </div>
   
-  <section class="schedule">
-    <h3>Harmonogram</h3>
-    <div class="card">
-      <p-timeline [value]="events" align="alternate" styleClass="customized-timeline">
+  <div id="section2" class="section schedule">
+    <div class="h2">Harmonogram</div>
+    <div class="custom-card">
+      <p-timeline [value]="events" [align]="timelineAlign" styleClass="customized-timeline">
           <ng-template pTemplate="marker" let-event>
               <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-                  <i [ngClass]="event.icon"></i>
+                  <!-- <i [ngClass]="event.icon"></i> -->
+                  <span class="material-symbols-outlined">{{ event.icon }}</span>
               </span>
           </ng-template>
           <ng-template pTemplate="content" let-event>
               <p-card [header]="event.status" [subheader]="event.date">
-                  <img *ngIf="event.image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + event.image" [alt]="event.name" width="200" class="shadow-2" />
+                  <img *ngIf="event.image" [src]="'assets/' + event.image" [alt]="event.name" width="300" />
                   <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate
                       neque quas!
@@ -50,32 +84,50 @@
       </p-timeline>
   </div>
     
-  </section>
+</div>
   <div class="bottom-right-corner">
-    <p-knob [(ngModel)]="presentCount" [readonly]="true" [max]="userCount"></p-knob>
-    <div class="text">Aktualna liczba gości</div>
+    <p-knob [(ngModel)]="presentCount" valueColor="#0047AB" [readonly]="true" [max]="userCount"></p-knob>
+    <div class="text">Zgłoszeni goście</div>
   </div>
-  <section>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div id="section3" class="section form">
+    <form [formGroup]="userForm" (ngSubmit)="confirm()">
       <div class="p-fluid">
-        <div class="form-label">Potwierdzenie przybycia</div>
-        <div class="form-header">Drodzy Goście, bardzo prosimy o potwierdzenie przybycia do dnia <b>07.02.2025r</b>. Aby ułatwić Wam potwierdzenie przybycia, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za wypełnienie go i mamy nadzieję do zobaczenia!</div>
+        <div class="h2">Formularz</div>
+        <div class="description">Drodzy Goście, bardzo prosimy o potwierdzenie przybycia do dnia <b>07.02.2025r</b>. Aby ułatwić Wam potwierdzenie przybycia, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za wypełnienie go i mamy nadzieję do zobaczenia!</div>
         <div style="margin-top: 10px;" class="p-field-radiobutton">
           <div for="presence">Obecność</div>
           <p-radioButton name="presence" value="true" formControlName="presence" label="Będę!"></p-radioButton>
-          <p-radioButton name="presence" value="false" formControlName="presence" label="Niestety nie mogę :("></p-radioButton>
+          <p-radioButton name="presence" value="false" formControlName="presence" label="Niestety nie mogę 😢"></p-radioButton>
         </div>
         <div class="p-field">
           <label for="name">Imię</label>
-          <input id="name" type="text" pInputText formControlName="name" maxlength="30" pKeyFilter="alpha">
+          <input id="name" type="text" pInputText class="form-control" formControlName="name" maxlength="30" pKeyFilter="alpha" [ngClass]="{'is-invalid': userForm.get('name')?.touched && userForm.get('name')?.invalid}">
+          <span *ngIf="userForm.get('name')?.touched && userForm.get('name')?.hasError('required')" class="invalid-feedback">
+            Pole obowiązkowe.
+          </span>
+          <span *ngIf="userForm.get('name')?.touched && userForm.get('name')?.hasError('minlength')" class="invalid-feedback">
+            Zbyt krótkie imię.
+          </span>
         </div>
         <div class="p-field">
           <label for="surname">Nazwisko</label>
-          <input id="surname" type="text" pInputText formControlName="surname" maxlength="30" pKeyFilter="alpha">
+          <input id="surname" type="text" pInputText class="form-control" formControlName="surname" maxlength="30" pKeyFilter="alpha" [ngClass]="{'is-invalid': userForm.get('surname')?.touched && userForm.get('surname')?.invalid}">
+          <span *ngIf="userForm.get('surname')?.touched && userForm.get('surname')?.hasError('required')" class="invalid-feedback">
+            Pole obowiązkowe.
+          </span>
+          <span *ngIf="userForm.get('surname')?.touched && userForm.get('surname')?.hasError('minlength')" class="invalid-feedback">
+            Zbyt krótkie nazwisko.
+          </span>
         </div>
         <div class="p-field">
           <label for="phoneNumber">Telefon</label>
-          <input type="text" pInputText formControlName="phoneNumber" pKeyFilter="pint" maxlength="13">
+          <input type="text" pInputText formControlName="phoneNumber" pKeyFilter="pint" maxlength="13" [ngClass]="{'is-invalid': userForm.get('phoneNumber')?.touched && userForm.get('phoneNumber')?.invalid}">
+          <span *ngIf="userForm.get('phoneNumber')?.touched && userForm.get('phoneNumber')?.hasError('required')" class="invalid-feedback">
+            Pole obowiązkowe.
+          </span>
+          <span *ngIf="userForm.get('phoneNumber')?.touched && userForm.get('phoneNumber')?.hasError('minLength')" class="invalid-feedback">
+            Zbyt krótki numer.
+          </span>
         </div>
         <div class="p-field">
           <label for="allergies">Alergie</label>
@@ -93,9 +145,10 @@
           <textarea id="message" formControlName="message" rows="5" placeHolder="Będzie super, nie mogę się doczekać! :)" maxlength="300" pInputTextarea></textarea>
         </div>
         
-        <button type="submit" pButton label="Zapisz" [disabled]="!userForm.valid"></button>
+        <button type="submit" pButton label="Wyślij" [disabled]="!userForm.valid"></button>
+        
       </div>
     </form>
     
-  </section>
+  </div>
 </div>

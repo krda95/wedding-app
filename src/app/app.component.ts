@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CountdownService } from '../countdown.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TimelineModule } from 'primeng/timeline';
-import { CommonModule } from '@angular/common';
 import { CardModule } from 'primeng/card';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
 import { FirestoreService } from './firestore.service';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -15,6 +15,11 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KnobModule } from 'primeng/knob';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 
 import { MapComponentComponent } from './map-component/map-component.component';
 import { Subscription } from 'rxjs';
@@ -33,13 +38,19 @@ interface MapItem {
   name?: string;
   description?: string;
   url?: string;
+  lat: number;
+  long: number;
+  extension?: string;
+  address?: string;
+  google?: string;
 }
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet
+  imports: [
+    RouterOutlet
     ,TimelineModule
     ,CardModule
     ,CommonModule
@@ -53,6 +64,12 @@ interface MapItem {
     ,FormsModule
     ,MapComponentComponent
     ,KeyFilterModule
+    ,ConfirmDialogModule
+    ,ToastModule
+  ],
+  providers: [
+    ConfirmationService,
+    MessageService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -63,53 +80,98 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'wedding-app';
   events: EventItem[];
   mapItems: MapItem[];
-
+  selectedLocation = new EventEmitter<any>();
+  public screenWidth = 1000;
+  desktopImg = "assets/desktop-wedding.png"
+  mobileImg = "assets/mobile-wedding.png"
+  
   countdown: {days: number, hours: number, minutes: number, seconds: number} | undefined;
   safeUrl: SafeHtml;
   userForm: FormGroup;
   userCount: number = 0;
   presentCount: number = 0;
   private countSub: Subscription | undefined;
+  public timelineAlign: string = 'alternate';
   
 
-  constructor(private countdownService: CountdownService, private sanitizer: DomSanitizer, private firestoreService: FirestoreService, private fb: FormBuilder) {
+  constructor(private countdownService: CountdownService, private sanitizer: DomSanitizer, private firestoreService: FirestoreService, private fb: FormBuilder, private renderer: Renderer2, private confirmationService: ConfirmationService, private messageService: MessageService) {
+    this.updateTimelineAlign()
     this.userForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      surname: ['', [Validators.required, Validators.minLength(3)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(9)]],
+      name: ['', [this.customRequired, Validators.minLength(3)]],
+      surname: ['', [this.customRequired, Validators.minLength(3)]],
+      phoneNumber: ['', [this.customRequired, this.phoneNumberLength]],
       allergies: [''],
       menuPreference: ['any', Validators.required],
       presence: ['true'],
       message: ['']
     });
 
-    const embedCode = `<iframe width="560" height="315" src="https://www.youtube.com/embed/tujJhy5kvnE?si=yPVC42uo9fIEifz_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+    const embedCode = `<iframe class="iframe" src="https://www.youtube.com/embed/tujJhy5kvnE?si=yPVC42uo9fIEifz_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
     this.safeUrl = this.sanitizer.bypassSecurityTrustHtml(embedCode);
     this.events = [
-      { status: 'Poznajmy się', date: '08/05/2025', icon: 'pi pi-users', color: '#9C27B0', image: 'game-controller.jpg' },
-      { status: 'Wesele', date: '09/05/2025', icon: 'pi pi-gift', color: '#673AB7' },
-      // { status: 'Shipped', date: '15/10/2020 16:15', icon: 'pi pi-shopping-cart', color: '#FF9800' },
-      // { status: 'Delivered', date: '16/10/2020 10:00', icon: 'pi pi-check', color: '#607D8B' }
+      { status: 'Zameldowanie w hotelu', date: '08/05/2025 14:00', icon: 'hotel', color: '#0047AB', image: 'reception.png' },
+      { status: 'Poznajmy się', date: '08/05/2025 18:00', icon: 'liquor', color: '#0047AB', image: 'fun.png' },
+      { status: 'Ceremonia & Wesele', date: '09/05/2025 17:00', icon: 'nightlife', color: '#0047AB', image: 'wedding.png' },
+      { status: 'Śniadanie', date: '10/05/2025 10:00', icon: 'restaurant', color: '#0047AB', image: 'breakfast.png' },
+      { status: 'Check out', date: '10/05/2025 12:00', icon: 'waving_hand', color: '#0047AB', image: 'bye.png' },
     ];
 
     this.mapItems = [
-      { icon: '/assets/hotel-marker.png', name: 'Hotel', description: 'Nazwa hotelu', url: 'https://www.wp.pl'},
-      { icon: '/assets/wedding-marker.png', name: 'Willa weselna', description: 'Adres/nazwa wilii', url: 'https://www.google.com'},
-      { icon: '/assets/party-marker.png', name: 'Integracja', description: 'Adres/nazwa restauracji', url: 'https://www.google.com'},
+      { icon: '/assets/Hotel.png', name: 'Hotel', description: 'Nafplio Hotel Ippoliti', url: 'https://www.ippoliti.gr/', lat: 37.56610, long: 22.79490 , address: 'Ilia Miniati 9, Nafplio', google: 'https://www.google.com/maps/place/Hotel+Ippoliti/@37.5663875,22.7926116,17z/data=!3m1!4b1!4m9!3m8!1s0x149ffa96517745fd:0x60e09df80cd1b9c6!5m2!4m1!1i2!8m2!3d37.5663833!4d22.7951865!16s%2Fg%2F1vf_2x3p?entry=ttu'},
+      { icon: '/assets/Willa.png', name: 'Willa weselna', description: 'Willa Merika', address: 'Epar.Od. Kiveriou - Astrous, Kato Vervena 220 01', google:'https://www.google.com/maps/place//data=!4m2!3m1!1s0x149fe6de46520389:0x96700dcb2db88ac2?sa=X&ved=1t:8290&ictx=111', url: 'https://villamerika.gr/', lat: 37.50180, long: 22.73120},
+      { icon: '/assets/Integracja.png', name: 'Integracja', extension: '"Poznajmy się"', description: 'Adres/nazwa restauracji', url: 'https://www.google.com', lat: 37.5695801, long: 22.8037386},
     ]
+    //37.5070348,22.6841962
+    //37.50180,22.73120
   }
-  ngOnDestroy(): void {
-    
+  ngOnDestroy(): void { }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.updateTimelineAlign();
   }
+
+  updateTimelineAlign() {
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth <= 500) {
+      this.timelineAlign = 'left';
+    } else {
+      this.timelineAlign = 'alternate';
+    }
+  }
+
+  private customRequired(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value === null || value === undefined || value.trim() === '') {
+      return { required: true };
+    }
+    return null;
+  }
+  
+  private phoneNumberLength(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value && value.length < 9) {
+      return { minLength: { requiredLength: 9, actualLength: value.length } };
+    }
+    return null;
+  }
+
+  onItemSelect(item: any) {
+    this.selectedLocation.emit(item);
+  }
+
+  scrollToSection(event: Event, sectionId: string) {
+    event.preventDefault();
+    const section = this.renderer.selectRootElement(`#${sectionId}`, true);
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+
   ngOnInit(): void {
-    const weddingDate = new Date('2025-05-09T00:00:00');
+    const weddingDate = new Date('2025-05-09T16:00:00');
     this.countdownService.countdownToDate(weddingDate).subscribe(countdown => {
       this.countdown = countdown;
     });
 
-    // this.firestoreService.observeUserCount(count => {
-    //   this.userCount = count;
-    // });
     this.countSub = this.firestoreService.observeUserCount2().subscribe({
       next: (counts) => {
         this.userCount = counts.total;
@@ -117,6 +179,30 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       error: (error) => console.error('Error observing user count:', error),
     });
+  }
+
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz wysłać zgłoszenie?',
+      header: 'Potwierdzenie',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Tak',
+      rejectLabel: 'Nie',
+      rejectButtonStyleClass: 'secondary-button',
+      accept: () => {
+        this.onSubmit()
+      },
+      reject: () => { 
+      }
+    });
+  }
+
+  showSuccess() {
+    this.messageService.add({severity:'success', summary: 'Super!', detail: 'Para młoda potwierdzi Waszą obecność drogą mailową lub telefonicznie 🥳', life: 10000});
+  }
+
+  showFailure(error?: string) {
+    this.messageService.add({severity:'danger', summary: error ? 'Coś poszło nie tak...' : 'Oj...', detail: error ?? 'Bardzo nam przykro, szkoda, że Cię nie będzie.', life: 5000});
   }
 
   onSubmit(): void {
@@ -130,17 +216,23 @@ export class AppComponent implements OnInit, OnDestroy {
         this.userForm.value.presence,
         this.userForm.value.message,
       ).then(() => {
-        console.log('Data saved successfully');
+        if(this.userForm.value.presence === 'true') {
+          this.showSuccess()
+        } else {
+
+          this.showFailure()
+        }
         this.userForm.reset({
           name: '',
           surname: '',
           phoneNumber: '',
           allergies: '',
-          menuPreference: 'any', // Reset to default value if you have one
-          presence: 'true', // Assuming 'yes' is a default value
+          menuPreference: 'any',
+          presence: 'true',
           message: ''
         });
       }).catch(error => {
+        this.showFailure(error);
         console.error('Error saving data: ', error);
       });
     }

@@ -1,77 +1,225 @@
 $light-blue: #007bff;
 $dark-blue: #0047AB;
+$background-blue: #DCE8EF;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::ng-deep .p-toast-message-danger {
+  background-color: #ff4d4d; /* Custom background color for error messages */
+  color: white;
+}
+
+::ng-deep .secondary-button {
+  background-color: #f0f0f0;  /* Light grey background */
+  color: #666;                /* Dark grey text */
+  border: 1px solid #ccc;     /* Light grey border */
+}
+
+::ng-deep .secondary-button:hover {
+  background-color: #e0e0e0;  /* Slightly darker grey on hover */
+}
+
+@media (max-width: 500px) {
+  body {
+    display: flex;
+  }
+}
 
 .invitation-page {
     background: whitesmoke;
     background-size: cover;
     color: #fff;
     text-align: center;
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Poppins';
+
+    .custom-container {
+      display: flex;
+      align-items: center;
+      background-color: $background-blue;
+      padding: 10px;
+    }
+
+    .flag {
+      @media (max-width: 500px) {
+        height: 60px;
+      }
+      height: 120px;
+      border-radius: 10px;
+    }
+
+    .cover {
+      img {
+        width: 100%;
+      }
+    } 
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    a {
+      @media (max-width: 500px) {
+        font-size: 14px;
+      }
+      color: $dark-blue;
+      font-size: 24px;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+
+    .section {
+      padding: 20px 0 0 0;
+    }
 
     .text {
-      color: $light-blue;
+      color: $dark-blue
     }
     
-    h1 {
-      color: $dark-blue; // Intense blue
-      margin-top: 0;
-    }
-  
-    h2 {
-      font-family: 'Dancing Script', cursive; // Przykładowa czcionka przypominająca pismo ręczne
+    .h1 {
+      @media (max-width: 500px) {
+        font-size: 60px;
+      }
       color: $dark-blue;
-      margin: 1rem 0;
-      font-size: xx-large;
+      font-family: 'Great Vibes';
+      font-size: 94px;
+      margin-top: 20px;
     }
 
-    .written-text {
-      display: inline-block; /* Or block depending on your layout */
-      white-space: nowrap; /* Keeps the text in one line */
-      overflow: hidden; /* Hides the part of the text that exceeds the container's width */
-      // border-right: 2px solid; /* Simulates the text cursor; adjust as needed */
-      width: 0; /* Start width at 0 so the text is initially hidden */
-      animation: write 3s steps(40, end) forwards; /* Adjust timing and steps as needed */
-    }
-    
     @keyframes write {
       from {
         width: 0;
       }
       to {
-        width: 20%; /* Animate to full width */
+        width: 50%;
       }
     }
+
+    @keyframes write_small {
+      from {
+        width: 0;
+      }
+      to {
+        width: 80%;
+      }
+    }
+
     
-  
+    .written-text {
+      @media (max-width: 500px) {
+        animation: write_small 5s steps(50, end) forwards;
+      }
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: write 5s steps(50, end) forwards;
+    }
+    
     .date {
-      font-size: 1.25rem;
+      font-size: 50px;
       color: $dark-blue;
-      margin-bottom: 2rem;
+      margin-bottom: 20px;
+      font-weight: bolder;
+    }
+
+    .countdown-container {
+      text-align: center;
+      background-color: $background-blue;
+      padding: 10px;
+    }
+    
+    .h2 {
+      color: $dark-blue;
+      font-size: 34px;
+      font-weight: bolder;
+    }
+
+    .countdown-area {
+      display: flex;
+      justify-content: center;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      border-radius: 20px;
+      margin-top: 20px;
+      background-color: whitesmoke;
+    }
+
+    .orange-rectangle {
+      position: absolute;
+      transform: translate3d(-130px, -100px, 0px);
+      background-color: #f4a261b3;
+      padding: 5px;
+      font-weight: bold;
+      font-family: 'auto';
+      font-size: 24px;
+    }
+
+    .countdown-segment {
+      background-color: #0033A0;
+      color: #fff;
+      width: 80px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 48px;
+      margin: 0 5px;
+    }
+    
+    .countdown-colon {
+      font-size: 48px;
+      color: #0033A0;
     }
 
     .video {
-        padding-top: 20px;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
     }
 
     .description {
-      background-color: #0047ab94;
-      margin: auto;
+      @media (max-width: 500px) {
+        padding: 5px;
+      }
+      color: $dark-blue;
+      font-size: 20px;
       padding: 20px;
-      width: 80%;
-      border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .extension {
+      color: $dark-blue;
+      font-size: 20px;
+      font-weight: bolder;
     }
 
     .map-card {
+      @media (max-width: 500px) {
+        flex: 0 0 auto;
+        width: unset;
+      }
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      color: $dark-blue;
       border-radius: 8px;
-      max-width: 200px;
+      width: 300px;
+      background-color: whitesmoke;
+      justify-content: space-around;
     }
     
     .map-card-image {
@@ -83,20 +231,8 @@ $dark-blue: #0047AB;
       border-radius: 50%; /* Optional: for round images */
     }
     
-    .map-card-headline {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    
-    .map-card-description {
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-      color: $light-blue;
-      font-style: italic;
-    }
-    
     .map-card-link {
-      color: #007bff; /* Blue color for the link */
+      color: $dark-blue; /* Blue color for the link */
       text-decoration: underline; /* Removes underline */
       font-weight: bold;
 
@@ -106,7 +242,7 @@ $dark-blue: #0047AB;
     }
     
   
-    .location ul, .schedule .event {
+    .location ul, .event {
       background-color: #0047ab94;
       margin: auto;
       padding: 20px;
@@ -120,6 +256,7 @@ $dark-blue: #0047AB;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      background-color: $background-blue;
     }
     
     .location-content {
@@ -128,130 +265,152 @@ $dark-blue: #0047AB;
       width: 100%;
       align-items: center;
       gap: 10px;
+      margin-top: 20px;
     }
 
     .location-list {
+      @media (max-width: 500px) {
+        overflow-x: auto;
+        padding: 10px 40px;
+        width: 100%;
+      }
+      @media only screen and (max-height: 575px) and (orientation: landscape) {
+        max-width: 900px;
+      }
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 10px;
       display: flex;
-      gap: 20px;
+      gap: 40px;
     }
     
     .location-map {
-      padding: 0 20px; /* Add some padding for spacing, adjust as needed */
-      width: 80%;
-    }
-    
-  
-    .location h3, .schedule h3 {
-      color: $dark-blue;
+      @media (max-width: 500px) {
+        width: 100%;
+      }
+      padding: 0 40px;
+      width: 65%;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
   
     .event {
       margin-bottom: 1rem;
       text-align: left;
       
-  
       .event-date {
         font-weight: bold;
       }
     }
 
-    .card {
-      margin: 0 10%;
+    .custom-card {
+      @media (max-width: 500px) {
+        margin: 20px 0;
+      }
+      margin: 20px 10%;
+    }
+
+    .custom-marker {
+      border-radius: 10px;
+      padding: 5px;
     }
 
     .bottom-right-corner {
       position: fixed; /* Fixed positioning relative to the viewport */
       right: 10px; /* Distance from the right edge of the viewport */
-      bottom: 10px; /* Distance from the bottom edge of the viewport */
+      bottom: 25px; /* Distance from the bottom edge of the viewport */
       padding: 5px;
       border-radius: 5px; /* Rounded corners */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional shadow for depth */
       z-index: 1000; /* Ensure it stays on top of other content */
     }
 
-    section {
-      form {
-        margin-top: 20px;
+    form {
+      background-color: $background-blue;
+      padding-top: 20px;
 
-        .form-label {
-          color: $light-blue; // Makes label text blue
-          font-weight: bold; // Optionally makes the text bold
-          margin-bottom: 10px;
-          font-size: x-large;
+      .p-fluid {
+        @media (max-width: 500px) {
+          margin: 10px;
         }
-
-        .form-header {
-          color: $light-blue; 
-        }
-
-        .p-fluid {
-          max-width: 600px; // Sets a max-width for the form for a modern look
-          margin: auto; // Centers the form in the section
-    
-          .p-field, .p-field-radiobutton {
-            text-align: left; // Aligns label and input text to the left
-            margin-bottom: 1rem; // Adds space between each field
-    
-            label, div {
-              color: $light-blue; // Makes label text blue
-              font-weight: bold; // Optionally makes the text bold
-              margin-bottom: 10px;
-            }
-    
-            input {
-              width: 100%; // Makes input fields take up full width of their container
-              padding: 0.5rem; // Adds padding inside input fields for better readability
-              border: 1px solid #ced4da; // Gives a subtle border to input fields
-              border-radius: 0.25rem; // Adds slight rounding to the corners of the input fields
-    
-              &:focus {
-                border-color: #80bdff; // Changes border color on focus for a modern effect
-                outline: 0; // Removes default focus outline
-                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); // Adds a subtle "glow" effect on focus
-              }
-            }
-    
-            // Style for the disabled submit button to make it visually distinct
-            button:disabled {
-              background-color: #6c757d; // Changes background color for disabled state
-              cursor: not-allowed; // Changes cursor to indicate the button is disabled
+        max-width: 600px; // Sets a max-width for the form for a modern look
+        margin: auto; // Centers the form in the section
+  
+        .p-field, .p-field-radiobutton {
+          text-align: left; // Aligns label and input text to the left
+          margin-bottom: 1rem; // Adds space between each field
+  
+          label, div {
+            color: $dark-blue; // Makes label text blue
+            font-weight: bold; // Optionally makes the text bold
+            margin-bottom: 10px;
+          }
+  
+          input {
+            width: 100%; // Makes input fields take up full width of their container
+            padding: 0.5rem; // Adds padding inside input fields for better readability
+            border-radius: 0.25rem; // Adds slight rounding to the corners of the input fields
+  
+            &:focus {
+              border-color: #80bdff; // Changes border color on focus for a modern effect
+              outline: 0; // Removes default focus outline
+              box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); // Adds a subtle "glow" effect on focus
             }
           }
-    
-          // Styling for the submit button
-          button {
-            background-color: $light-blue; // Sets button background color
-            color: white; // Sets button text color to white
-            padding: 0.5rem 1rem; // Adds padding around the button text
-            border: none; // Removes the border
-            border-radius: 0.25rem; // Rounds the corners of the button
-            font-size: 1rem; // Sets font size
-            cursor: pointer; // Changes cursor to pointer when hovering over the button
-    
-            &:hover {
-              background-color: #0056b3; // Darkens the button on hover for a visual effect
-            }
+  
+          button:disabled {
+            background-color: #6c757d; // Changes background color for disabled state
+            cursor: not-allowed; // Changes cursor to indicate the button is disabled
+          }
+        }
+  
+        button {
+          background-color: $dark-blue; // Sets button background color
+          color: white; // Sets button text color to white
+          padding: 0.5rem 1rem; // Adds padding around the button text
+          border: none; // Removes the border
+          border-radius: 0.25rem; // Rounds the corners of the button
+          font-size: 1rem; // Sets font size
+          cursor: pointer; // Changes cursor to pointer when hovering over the button
+          margin-bottom: 20px;
+  
+          &:hover {
+            background-color: $light-blue; // Darkens the button on hover for a visual effect
           }
         }
       }
     }
-    
   }
 
   :host {
     ::ng-deep {
       .p-field-radiobutton label, .p-field-checkbox label {
-        color: $light-blue; /* Blue color for the labels */
-        font-weight: bold; /* Makes the text bold */
+        color: $dark-blue;
+        font-weight: bold;
+      }
+
+      p-knob {
+        --knob-bg-color: $dark-blue; /* Background color of the knob */
+        --knob-handle-color: $dark-blue; /* Handle color */
+        --knob-range-color: $dark-blue; /* Range color */
+        --knob-value-color: $dark-blue; /* Value color */
       }
 
       .p-radiobutton {
         margin-left: 10px;
+        
+        .p-radiobutton-box.p-highlight {
+          border-color: $dark-blue;
+          background-color: $dark-blue;
 
+        }
+      }
+
+      .p-card, .p-card-subtitle {
+        color: $dark-blue;
       }
       
       input::placeholder, textarea::placeholder {
-        font-style: italic; /* Ustawia tekst placeholdera na kursywę */
+        font-style: italic;
         opacity: 0.5;
       }
 
@@ -262,7 +421,7 @@ $dark-blue: #0047AB;
       }
   
       .p-field label {
-        color: $light-blue; /* Blue color for the labels */
+        color: $dark-blue; /* Blue color for the labels */
         font-weight: bold; /* Makes the text bold */
       }
   
@@ -279,7 +438,6 @@ $dark-blue: #0047AB;
         }
       }
       
-      /* Style adjustments for the radio buttons and checkbox to improve alignment */
       .p-radiobutton .p-radiobutton-label, .p-checkbox .p-checkbox-label {
         vertical-align: middle; /* Centers the label text vertically with the radio/checkbox */
         margin-left: 0.5rem; /* Adds a little space between the radio/checkbox and the label */
