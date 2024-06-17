@@ -12,6 +12,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
 
   @Input() selectedItem: any;
   private map: any;
+  markers: any;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedItem']) {
@@ -23,6 +24,13 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     if (item) {
       this.map.setView([item.lat, item.long], 13);
     }
+  }
+
+  private fitBoundsToMarkers(): void {
+    if (this.markers.length === 0) return;
+
+    const group = L.featureGroup(this.markers);
+    this.map.fitBounds(group.getBounds());
   }
 
   ngAfterViewInit(): void {
@@ -40,33 +48,38 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       maxZoom: 18,
     }).addTo(this.map);
 
-    const weddingMarker = L.icon({
-      iconUrl: '/assets/Willa.png',
+    const weddingIcon = L.icon({
+      iconUrl: '/assets/Willa-color.png',
       iconSize: [50, 55],
       iconAnchor: [25, 55],
       popupAnchor: [0, -50]
     });
 
-    const hotelMarker = L.icon({
-      iconUrl: '/assets/Hotel.png',
+    const hotelIcon = L.icon({
+      iconUrl: '/assets/Hotel-color.png',
       iconSize: [50, 55],
       iconAnchor: [25, 55],
       popupAnchor: [0, -50]
     });
 
-    const integrationMarker = L.icon({
-      iconUrl: '/assets/Integracja.png',
+    const integrationIcon = L.icon({
+      iconUrl: '/assets/Integracja-color.png',
       iconSize: [50, 55],
       iconAnchor: [25, 55],
       popupAnchor: [0, -50]
     });
 
-    L.marker([WEDDING_LATITUDE, WEDDING_LONGITUDE], { icon: weddingMarker }).addTo(this.map)
+    
+
+    const weddingMarker = L.marker([WEDDING_LATITUDE, WEDDING_LONGITUDE], { icon: weddingIcon }).addTo(this.map)
       .bindPopup('Willa weselna')
-    L.marker([HOTEL_LATITUDE, HOTEL_LONGITUDE], { icon: hotelMarker }).addTo(this.map)
+    const hotelMarker = L.marker([HOTEL_LATITUDE, HOTEL_LONGITUDE], { icon: hotelIcon }).addTo(this.map)
       .bindPopup('Hotel')
-    L.marker([INTEGRATION_LATITUDE, INTEGRATION_LONGITUDE], { icon: integrationMarker }).addTo(this.map)
+    const integrationMarker = L.marker([INTEGRATION_LATITUDE, INTEGRATION_LONGITUDE], { icon: integrationIcon }).addTo(this.map)
       .bindPopup('Integracja')
+
+      this.markers = [weddingMarker, hotelMarker, integrationMarker]
+      this.fitBoundsToMarkers()
 
   }
   ngOnInit(): void {

@@ -53,7 +53,7 @@
           <div class="extension">{{ item.extension }}</div>
           <div class="description">{{ item.description }}</div>
           <a *ngIf="item.address" [href]="item.google" class="description" target="_blank">{{ item.address }}</a>
-          <a [href]="item.url" class="map-card-link" target="_blank">Zobacz szczegóły</a>
+          <a *ngIf="item.url" [href]="item.url" class="map-card-link" target="_blank">Zobacz szczegóły</a>
         </div>
       </div>
       <div class="location-map">
@@ -68,16 +68,14 @@
       <p-timeline [value]="events" [align]="timelineAlign" styleClass="customized-timeline">
           <ng-template pTemplate="marker" let-event>
               <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-                  <!-- <i [ngClass]="event.icon"></i> -->
                   <span class="material-symbols-outlined">{{ event.icon }}</span>
               </span>
           </ng-template>
           <ng-template pTemplate="content" let-event>
               <p-card [header]="event.status" [subheader]="event.date">
                   <img *ngIf="event.image" [src]="'assets/' + event.image" [alt]="event.name" width="300" />
-                  <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate
-                      neque quas!
+                  <p *ngIf="event.text" style="padding-top: 20px;">
+                      {{ event.text }}
                   </p>
               </p-card>
           </ng-template>
@@ -93,7 +91,7 @@
     <form [formGroup]="userForm" (ngSubmit)="confirm()">
       <div class="p-fluid">
         <div class="h2">Formularz</div>
-        <div class="description">Drodzy Goście, bardzo prosimy o potwierdzenie przybycia do dnia <b>07.02.2025r</b>. Aby ułatwić Wam potwierdzenie przybycia, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za wypełnienie go i mamy nadzieję do zobaczenia!</div>
+        <div class="description">Drodzy Goście, bardzo prosimy o potwierdzenie przybycia do dnia <u>07.02.2025 r</u>. Aby ułatwić Wam potwierdzenie przybycia, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za wypełnienie go <br>i mamy nadzieję do zobaczenia!</div>
         <div style="margin-top: 10px;" class="p-field-radiobutton">
           <div for="presence">Obecność</div>
           <p-radioButton name="presence" value="true" formControlName="presence" label="Będę!"></p-radioButton>

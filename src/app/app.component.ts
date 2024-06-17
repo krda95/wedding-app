@@ -31,6 +31,7 @@ interface EventItem {
   icon?: string;
   color?: string;
   image?: string;
+  text?: string;
 }
 
 interface MapItem {
@@ -106,23 +107,21 @@ export class AppComponent implements OnInit, OnDestroy {
       message: ['']
     });
 
-    const embedCode = `<iframe class="iframe" src="https://www.youtube.com/embed/tujJhy5kvnE?si=yPVC42uo9fIEifz_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+    const embedCode = `<iframe class="iframe" src="https://www.youtube.com/embed/yMYLQTDwv2M?si=iCjjlL6OTtteXgpp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
     this.safeUrl = this.sanitizer.bypassSecurityTrustHtml(embedCode);
     this.events = [
-      { status: 'Zameldowanie w hotelu', date: '08/05/2025 14:00', icon: 'hotel', color: '#0047AB', image: 'reception.png' },
-      { status: 'Poznajmy się', date: '08/05/2025 18:00', icon: 'liquor', color: '#0047AB', image: 'fun.png' },
-      { status: 'Ceremonia & Wesele', date: '09/05/2025 17:00', icon: 'nightlife', color: '#0047AB', image: 'wedding.png' },
-      { status: 'Śniadanie', date: '10/05/2025 10:00', icon: 'restaurant', color: '#0047AB', image: 'breakfast.png' },
-      { status: 'Check out', date: '10/05/2025 12:00', icon: 'waving_hand', color: '#0047AB', image: 'bye.png' },
+      { status: 'Zameldowanie w hotelu', date: '08/05/2025 14:00', icon: 'hotel', color: '#0047AB', image: 'reception.png', text: "Grzecznie meldujemy się na recepcji." },
+      { status: 'Poznajmy się', date: '08/05/2025 18:00', icon: 'liquor', color: '#0047AB', image: 'fun.png', text: "Okazja by się lepiej poznać, niedaleko hotelu w lokalnej knajpie." },
+      { status: 'Ceremonia & Wesele', date: '09/05/2025 17:00', icon: 'nightlife', color: '#0047AB', image: 'wedding.png', text: "Główne wydarzenie, dojazd taxi z hotelu w 2 strony." },
+      { status: 'Śniadanie', date: '10/05/2025 10:00', icon: 'restaurant', color: '#0047AB', image: 'breakfast.png', text: "Solidne greckie śniadanie w hotelu stawiające na nogi." },
+      { status: 'Check out', date: '10/05/2025 12:00', icon: 'waving_hand', color: '#0047AB', image: 'bye.png', text: "Pożegnanie i powrót do Polski." },
     ];
 
     this.mapItems = [
       { icon: '/assets/Hotel.png', name: 'Hotel', description: 'Nafplio Hotel Ippoliti', url: 'https://www.ippoliti.gr/', lat: 37.56610, long: 22.79490 , address: 'Ilia Miniati 9, Nafplio', google: 'https://www.google.com/maps/place/Hotel+Ippoliti/@37.5663875,22.7926116,17z/data=!3m1!4b1!4m9!3m8!1s0x149ffa96517745fd:0x60e09df80cd1b9c6!5m2!4m1!1i2!8m2!3d37.5663833!4d22.7951865!16s%2Fg%2F1vf_2x3p?entry=ttu'},
       { icon: '/assets/Willa.png', name: 'Willa weselna', description: 'Willa Merika', address: 'Epar.Od. Kiveriou - Astrous, Kato Vervena 220 01', google:'https://www.google.com/maps/place//data=!4m2!3m1!1s0x149fe6de46520389:0x96700dcb2db88ac2?sa=X&ved=1t:8290&ictx=111', url: 'https://villamerika.gr/', lat: 37.50180, long: 22.73120},
-      { icon: '/assets/Integracja.png', name: 'Integracja', extension: '"Poznajmy się"', description: 'Adres/nazwa restauracji', url: 'https://www.google.com', lat: 37.5695801, long: 22.8037386},
+      { icon: '/assets/Integracja.png', name: 'Integracja', extension: '"Poznajmy się"', description: '(Miejsce do ustalenia)', lat: 37.5695801, long: 22.8037386},
     ]
-    //37.5070348,22.6841962
-    //37.50180,22.73120
   }
   ngOnDestroy(): void { }
 
