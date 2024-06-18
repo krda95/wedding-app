@@ -73,8 +73,8 @@
           </ng-template>
           <ng-template pTemplate="content" let-event>
               <p-card [header]="event.status" [subheader]="event.date">
-                  <img *ngIf="event.image" [src]="'assets/' + event.image" [alt]="event.name" width="300" />
-                  <p *ngIf="event.text" style="padding-top: 20px;">
+                  <img *ngIf="event.image" [src]="'assets/' + event.image" [alt]="event.name" [width]="imgWidth" />
+                  <p *ngIf="event.text" style="padding-top: 20px; margin-bottom: 0;">
                       {{ event.text }}
                   </p>
               </p-card>

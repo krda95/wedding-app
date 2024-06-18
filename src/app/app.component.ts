@@ -93,6 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
   presentCount: number = 0;
   private countSub: Subscription | undefined;
   public timelineAlign: string = 'alternate';
+  public imgWidth: number = 400;
   
 
   constructor(private countdownService: CountdownService, private sanitizer: DomSanitizer, private firestoreService: FirestoreService, private fb: FormBuilder, private renderer: Renderer2, private confirmationService: ConfirmationService, private messageService: MessageService) {
@@ -134,8 +135,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth <= 500) {
       this.timelineAlign = 'left';
+      this.imgWidth = 200;
     } else {
       this.timelineAlign = 'alternate';
+      this.imgWidth = 400;
     }
   }
 

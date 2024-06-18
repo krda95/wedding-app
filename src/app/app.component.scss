@@ -56,6 +56,10 @@ html {
     } 
 
     nav {
+      @media (max-width: 500px) {
+        flex-direction: column;
+        text-align: right;
+      }
       display: flex;
       justify-content: space-around;
       width: 100%;
@@ -388,6 +392,12 @@ html {
         font-weight: bold;
       }
 
+      .p-timeline-event-opposite {
+        @media (max-width: 500px) {
+          flex: unset;
+        }
+      }
+
       p-knob {
         --knob-bg-color: $dark-blue; /* Background color of the knob */
         --knob-handle-color: $dark-blue; /* Handle color */
@@ -407,6 +417,10 @@ html {
 
       .p-card, .p-card-subtitle {
         color: $dark-blue;
+      }
+
+      .p-card-content {
+        padding: 0;
       }
       
       input::placeholder, textarea::placeholder {
