@@ -119,9 +119,9 @@ export class AppComponent implements OnInit, OnDestroy {
     ];
 
     this.mapItems = [
-      { icon: '/assets/Hotel.png', name: 'Hotel', description: 'Nafplio Hotel Ippoliti', url: 'https://www.ippoliti.gr/', lat: 37.56610, long: 22.79490 , address: 'Ilia Miniati 9, Nafplio', google: 'https://www.google.com/maps/place/Hotel+Ippoliti/@37.5663875,22.7926116,17z/data=!3m1!4b1!4m9!3m8!1s0x149ffa96517745fd:0x60e09df80cd1b9c6!5m2!4m1!1i2!8m2!3d37.5663833!4d22.7951865!16s%2Fg%2F1vf_2x3p?entry=ttu'},
-      { icon: '/assets/Willa.png', name: 'Willa weselna', description: 'Willa Merika', address: 'Epar.Od. Kiveriou - Astrous, Kato Vervena 220 01', google:'https://www.google.com/maps/place//data=!4m2!3m1!1s0x149fe6de46520389:0x96700dcb2db88ac2?sa=X&ved=1t:8290&ictx=111', url: 'https://villamerika.gr/', lat: 37.50180, long: 22.73120},
-      { icon: '/assets/Integracja.png', name: 'Integracja', extension: '"Poznajmy się"', description: '(Miejsce do ustalenia)', lat: 37.5695801, long: 22.8037386},
+      { icon: '/assets/hotel.png', name: 'Hotel', description: 'Nafplio Hotel Ippoliti', url: 'https://www.ippoliti.gr/', lat: 37.56610, long: 22.79490 , address: 'Ilia Miniati 9, Nafplio', google: 'https://www.google.com/maps/place/Hotel+Ippoliti/@37.5663875,22.7926116,17z/data=!3m1!4b1!4m9!3m8!1s0x149ffa96517745fd:0x60e09df80cd1b9c6!5m2!4m1!1i2!8m2!3d37.5663833!4d22.7951865!16s%2Fg%2F1vf_2x3p?entry=ttu'},
+      { icon: '/assets/willa.png', name: 'Willa weselna', description: 'Willa Merika', address: 'Epar.Od. Kiveriou - Astrous, Kato Vervena 220 01', google:'https://www.google.com/maps/place//data=!4m2!3m1!1s0x149fe6de46520389:0x96700dcb2db88ac2?sa=X&ved=1t:8290&ictx=111', url: 'https://villamerika.gr/', lat: 37.50180, long: 22.73120},
+      { icon: '/assets/integracja.png', name: 'Integracja', extension: '"Poznajmy się"', description: '(Miejsce do ustalenia)', lat: 37.5695801, long: 22.8037386},
     ]
   }
   ngOnDestroy(): void { }

@@ -49,21 +49,21 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     }).addTo(this.map);
 
     const weddingIcon = L.icon({
-      iconUrl: '/assets/Willa-color.png',
+      iconUrl: '/assets/willa-color.png',
       iconSize: [50, 55],
       iconAnchor: [25, 55],
       popupAnchor: [0, -50]
     });
 
     const hotelIcon = L.icon({
-      iconUrl: '/assets/Hotel-color.png',
+      iconUrl: '/assets/hotel-color.png',
       iconSize: [50, 55],
       iconAnchor: [25, 55],
       popupAnchor: [0, -50]
     });
 
     const integrationIcon = L.icon({
-      iconUrl: '/assets/Integracja-color.png',
+      iconUrl: '/assets/integracja-color.png',
       iconSize: [50, 55],
       iconAnchor: [25, 55],
       popupAnchor: [0, -50]
