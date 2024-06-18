@@ -211,7 +211,6 @@ html {
     .map-card {
       @media (max-width: 500px) {
         flex: 0 0 auto;
-        width: unset;
       }
       display: flex;
       flex-direction: column;
