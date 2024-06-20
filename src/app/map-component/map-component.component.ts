@@ -34,13 +34,14 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //lat: 37.50180, long: 22.73120
     const WEDDING_LATITUDE = 37.50180;
     const WEDDING_LONGITUDE = 22.73120;
     const HOTEL_LATITUDE = 37.56610;
     const HOTEL_LONGITUDE = 22.79490;
     const INTEGRATION_LATITUDE = 37.5695801;
     const INTEGRATION_LONGITUDE = 22.8037386;
+    const AIRPORT_LATITUDE = 37.9350;
+    const AIRPORT_LONGITUDE = 23.9495;
     
     this.map = L.map('map').setView([WEDDING_LATITUDE, WEDDING_LONGITUDE], 12);
 
@@ -69,6 +70,13 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       popupAnchor: [0, -50]
     });
 
+    const airportIcon = L.icon({
+      iconUrl: 'assets/lotnisko-color.png',
+      iconSize: [50, 55],
+      iconAnchor: [25, 55],
+      popupAnchor: [0, -50]
+    });
+
     
 
     const weddingMarker = L.marker([WEDDING_LATITUDE, WEDDING_LONGITUDE], { icon: weddingIcon }).addTo(this.map)
@@ -77,8 +85,10 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
       .bindPopup('Hotel')
     const integrationMarker = L.marker([INTEGRATION_LATITUDE, INTEGRATION_LONGITUDE], { icon: integrationIcon }).addTo(this.map)
       .bindPopup('Integracja')
+    const airportMarker = L.marker([AIRPORT_LATITUDE, AIRPORT_LONGITUDE], { icon: airportIcon }).addTo(this.map)
+      .bindPopup('Lotnisko')
 
-      this.markers = [weddingMarker, hotelMarker, integrationMarker]
+      this.markers = [weddingMarker, hotelMarker, integrationMarker, airportMarker]
       this.fitBoundsToMarkers()
 
   }

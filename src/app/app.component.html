@@ -37,9 +37,9 @@
     </div>
   </div>
   <div class="description">
-    Mamy zaszczyt zaprosić Was na nasze wesele, które odbędzie się w pięknej Grecji.
+    Kochani, Z ogromną radością zapraszamy Was na nasz Ślub i Wesele, które odbędą się w Nafplio w Grecji. Poniżej znajdziecie filmik oraz kilka informacji organizacyjnych, które pomogą Wam rozwiać wszelkie wątpliwości i przybliżyć nasz plan.
     <br><br>
-    Będzie nam niezmiernie miło gościć Was w tym wyjątkowym dniu!
+    Będzie nam niesamowicie miło świętować ten wyjątkowy dzień w Waszym towarzystwie!
   </div>
   <div class="video" [innerHtml]="safeUrl"></div>
 
@@ -90,12 +90,12 @@
   <div id="section3" class="section form">
     <form [formGroup]="userForm" (ngSubmit)="confirm()">
       <div class="p-fluid">
-        <div class="h2">Formularz</div>
-        <div class="description">Drodzy Goście, bardzo prosimy o potwierdzenie przybycia do dnia <u>07.02.2025 r</u>. Aby ułatwić Wam potwierdzenie przybycia, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za wypełnienie go <br>i mamy nadzieję do zobaczenia!</div>
+        <div class="h2">Daj nam znać</div>
+        <div class="description">Drodzy Goście, serdecznie prosimy o potwierdzenie Waszej obecności do dnia <u>7 lutego 2025</u> roku. <br>Aby ułatwić ten proces, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za jego wypełnienie<br> i mamy nadzieję, że będziemy mieli przyjemność spotkać się z Wami!</div>
         <div style="margin-top: 10px;" class="p-field-radiobutton">
           <div for="presence">Obecność</div>
-          <p-radioButton name="presence" value="true" formControlName="presence" label="Będę!"></p-radioButton>
-          <p-radioButton name="presence" value="false" formControlName="presence" label="Niestety nie mogę 😢"></p-radioButton>
+          <p-radioButton name="presence" value="true" formControlName="presence" label="Oczywiście, będę!"></p-radioButton>
+          <p-radioButton name="presence" value="false" formControlName="presence" label="Nie mogę dołączyć 😢"></p-radioButton>
         </div>
         <div class="p-field">
           <label for="name">Imię</label>
@@ -133,14 +133,14 @@
         </div>
         <div class="p-field-radiobutton">
           <div for="menuPreference">Preferencje menu</div>
-          <p-radioButton name="menuPreference" value="any" formControlName="menuPreference" label="Obojętne"></p-radioButton>
-          <p-radioButton name="menuPreference" value="vegetarian" formControlName="menuPreference" label="Wegetariańskie"></p-radioButton>
-          <p-radioButton name="menuPreference" value="vege" formControlName="menuPreference" label="Wege"></p-radioButton>
+          <p-radioButton name="menuPreference" value="any" formControlName="menuPreference" label="Zjem wszystko"></p-radioButton>
           <p-radioButton name="menuPreference" value="meat" formControlName="menuPreference" label="Mięsne"></p-radioButton>
+          <p-radioButton name="menuPreference" value="vegetarian" formControlName="menuPreference" label="Wegetariańskie"></p-radioButton>
+          <p-radioButton name="menuPreference" value="vege" formControlName="menuPreference" label="Wegańskie"></p-radioButton>
         </div>
         <div class="p-field">
           <label for="message">Wiadomość</label>
-          <textarea id="message" formControlName="message" rows="5" placeHolder="Będzie super, nie mogę się doczekać! :)" maxlength="300" pInputTextarea></textarea>
+          <textarea id="message" formControlName="message" rows="5" placeHolder='Napisz coś do nas jeśli chcesz… :)' maxlength="300" pInputTextarea></textarea>
         </div>
         
         <button type="submit" pButton label="Wyślij" [disabled]="!userForm.valid"></button>

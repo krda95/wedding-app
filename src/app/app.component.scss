@@ -290,9 +290,10 @@ html {
     .location-map {
       @media (max-width: 500px) {
         width: 100%;
+        padding: 0 40px;
       }
-      padding: 0 40px;
-      width: 65%;
+      padding: 0 170px;
+      width: 100%;
       margin-top: 20px;
       margin-bottom: 20px;
     }
