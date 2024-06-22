@@ -205,7 +205,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showFailure(error?: string) {
-    this.messageService.add({severity:'danger', summary: error ? 'Coś poszło nie tak...' : 'Oj...', detail: error ?? 'Bardzo nam przykro, szkoda, że Cię nie będzie.', life: 5000});
+    this.messageService.add({severity:'danger', summary: error ? 'Coś poszło nie tak...' : 'Oj...', detail: error ?? 'Bardzo nam przykro. Szkoda, że Cię nie będzie.', life: 5000});
   }
 
   onSubmit(): void {
