@@ -288,9 +288,6 @@ html {
         padding: 10px 40px;
         width: 100%;
       }
-      @media only screen and (max-height: 575px) and (orientation: landscape) {
-        max-width: 900px;
-      }
       flex-wrap: nowrap;
       overflow-x: auto;
       padding: 10px;
