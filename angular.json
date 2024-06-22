@@ -54,7 +54,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "https://krda95.github.io/wedding-app/"
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,

@@ -201,7 +201,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showSuccess() {
-    this.messageService.add({severity:'success', summary: 'Super!', detail: 'Para młoda potwierdzi Waszą obecność drogą mailową lub telefonicznie 🥳', life: 10000});
+    this.messageService.add({severity:'success', summary: 'Super!', detail: 'Para młoda potwierdzi jeszcze Waszą obecność telefonicznie 🥳', life: 10000});
   }
 
   showFailure(error?: string) {

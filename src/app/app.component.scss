@@ -7,18 +7,30 @@ html {
 }
 
 ::ng-deep .p-toast-message-danger {
-  background-color: #ff4d4d; /* Custom background color for error messages */
+  background-color: #ff4d4d;
   color: white;
 }
 
 ::ng-deep .secondary-button {
-  background-color: #f0f0f0;  /* Light grey background */
-  color: #666;                /* Dark grey text */
-  border: 1px solid #ccc;     /* Light grey border */
+  background-color: #f0f0f0;
+  color: #666;
+  border: 1px solid #ccc;
 }
 
 ::ng-deep .secondary-button:hover {
-  background-color: #e0e0e0;  /* Slightly darker grey on hover */
+  background-color: #e0e0e0;
+}
+
+::ng-deep .p-confirm-dialog {
+  @media (max-width: 500px) {
+    width: 80%;
+  }
+}
+
+::ng-deep .p-toast {
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 }
 
 @media (max-width: 500px) {
