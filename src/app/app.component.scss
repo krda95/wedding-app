@@ -225,7 +225,7 @@ html {
     }
 
     .map-card {
-      @media (max-width: 1200px) {
+      @media (max-width: 1400px) {
         flex: 0 0 auto;
       }
       display: flex;
@@ -288,24 +288,24 @@ html {
     }
 
     .location-list {
-      @media (max-width: 500px) {
-        padding: 10px 40px;
-        width: 100%;
+      @media (max-width: 1400px) {
+        width: 95%;
+        justify-content: unset;
       }
       flex-wrap: nowrap;
       overflow-x: auto;
       padding: 10px;
       display: flex;
       gap: 40px;
-      max-width: 100%;
+      width: 80%;
+      justify-content: center;
     }
     
     .location-map {
-      @media (max-width: 500px) {
-        width: 100%;
-        padding: 0 40px;
+      @media (max-width: 1400px) {
+        padding: 0 5%;
       }
-      padding: 0 170px;
+      padding: 0 10%;
       width: 100%;
       margin-top: 20px;
       margin-bottom: 20px;
