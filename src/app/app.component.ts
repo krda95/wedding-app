@@ -136,10 +136,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth <= 500) {
       this.timelineAlign = 'left';
-      this.imgWidth = 200;
     } else {
       this.timelineAlign = 'alternate';
-      this.imgWidth = 400;
     }
   }
 

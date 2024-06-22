@@ -220,6 +220,10 @@ html {
       font-weight: bolder;
     }
 
+    .eventImg {
+      max-width: 400px;
+    }
+
     .map-card {
       @media (max-width: 1200px) {
         flex: 0 0 auto;
@@ -411,7 +415,7 @@ html {
         --knob-bg-color: $dark-blue;
         --knob-handle-color: $dark-blue;
         --knob-range-color: $dark-blue;
-        --knob-value-color: #f4a261b3;
+        --knob-value-color: $dark-blue;
       }
 
       .p-radiobutton {
