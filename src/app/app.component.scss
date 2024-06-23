@@ -113,7 +113,7 @@ html {
         width: 0;
       }
       to {
-        width: 50%;
+        width: 500px;
       }
     }
 
@@ -122,20 +122,23 @@ html {
         width: 0;
       }
       to {
-        width: 80%;
+        width: 300px;
       }
     }
 
-    
     .written-text {
-      @media (max-width: 500px) {
-        animation: write_small 5s steps(50, end) forwards;
-      }
       display: inline-block;
       white-space: nowrap;
       overflow: hidden;
       width: 0;
       animation: write 5s steps(50, end) forwards;
+    }
+    
+    @media (max-width: 500px) {
+      .written-text {
+        width: 100%;
+        animation: write_small 5s steps(50, end) forwards;
+      }
     }
     
     .date {
