@@ -217,6 +217,14 @@ html {
       padding: 20px;
     }
 
+    .form-description {
+      @media (max-width: 500px) {
+        padding: 5px;
+      }
+      color: $dark-blue;
+      font-size: 20px;
+    }
+
     .extension {
       color: $dark-blue;
       font-size: 20px;
@@ -241,7 +249,7 @@ html {
       border-radius: 8px;
       width: 300px;
       background-color: whitesmoke;
-      justify-content: space-around;
+      justify-content: space-between;
     }
     
     .map-card-image {
@@ -308,7 +316,7 @@ html {
       @media (max-width: 1400px) {
         padding: 0 5%;
       }
-      padding: 0 10%;
+      padding: 0 11%;
       width: 100%;
       margin-top: 20px;
       margin-bottom: 20px;

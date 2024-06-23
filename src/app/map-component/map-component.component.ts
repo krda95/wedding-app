@@ -80,7 +80,7 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     
 
     const weddingMarker = L.marker([WEDDING_LATITUDE, WEDDING_LONGITUDE], { icon: weddingIcon }).addTo(this.map)
-      .bindPopup('Willa weselna')
+      .bindPopup('Villa weselna')
     const hotelMarker = L.marker([HOTEL_LATITUDE, HOTEL_LONGITUDE], { icon: hotelIcon }).addTo(this.map)
       .bindPopup('Hotel')
     const integrationMarker = L.marker([INTEGRATION_LATITUDE, INTEGRATION_LONGITUDE], { icon: integrationIcon }).addTo(this.map)

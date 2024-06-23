@@ -48,8 +48,10 @@
     <div class="location-content">
       <div class="location-list">
         <div *ngFor="let item of mapItems" class="map-card" (click)="onItemSelect(item)">
-          <div [style.background-image]="'url(' + item.icon + ')'" class="map-card-image"></div>
-          <div class="h2">{{ item.name }}</div>
+          <div class="d-flex align-items-center">
+            <div [style.background-image]="'url(' + item.icon + ')'" class="map-card-image"></div>
+            <div class="h2">{{ item.name }}</div>
+          </div>
           <div class="extension">{{ item.extension }}</div>
           <div class="description">{{ item.description }}</div>
           <a *ngIf="item.address" [href]="item.google" class="description" target="_blank">{{ item.address }}</a>
@@ -91,7 +93,7 @@
     <form [formGroup]="userForm" (ngSubmit)="confirm()">
       <div class="p-fluid">
         <div class="h2">Daj nam znać</div>
-        <div class="description">Drodzy Goście, serdecznie prosimy o potwierdzenie Waszej obecności do dnia <u>30 września 2024</u> roku. <br>Aby ułatwić ten proces, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za jego wypełnienie<br> i mamy nadzieję, że będziemy mieli przyjemność spotkać się z Wami!</div>
+        <div class="form-description">Drodzy Goście, serdecznie prosimy o potwierdzenie Waszej obecności do dnia <u>30 września 2024</u> roku. <br>Aby ułatwić ten proces, przygotowaliśmy dla Was poniższy formularz. Dziękujemy za jego wypełnienie i mamy nadzieję, że będziemy mieli przyjemność spotkać się z Wami!<br><br>Z uwagi na ograniczoną ilość miejsc bardzo prosimy o wcześniejsze potwierdzenie z nami ewentualnych osób towarzyszących.</div>
         <div style="margin-top: 10px;" class="p-field-radiobutton">
           <div for="presence">Obecność</div>
           <p-radioButton name="presence" value="true" formControlName="presence" label="Oczywiście, będę!"></p-radioButton>
