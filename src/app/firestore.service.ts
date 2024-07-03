@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, query, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { firebaseConfig } from '../config/firebase';
 import { Observable } from 'rxjs';
 
@@ -10,20 +10,24 @@ import { Observable } from 'rxjs';
 })
 export class FirestoreService {
   private db = getFirestore(initializeApp(firebaseConfig));
+  private isTest = false;
+  private dbName = this.isTest ?  'users-test' : 'users';
 
 
   constructor() { }
 
   async addUser(name: string, surname: string, phoneNumber: string, allergies: string[], menuPreference: string, presence: boolean, message: string): Promise<void> {
     try {
-      const docRef = await addDoc(collection(this.db, "users"), {
+      const docRef = await addDoc(collection(this.db, this.dbName), {
         name,
         surname,
         phoneNumber,
         allergies,
         menuPreference,
         presence,
-        message
+        message,
+        createdAt: serverTimestamp(),
+        confirmedAt: null
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
@@ -32,15 +36,15 @@ export class FirestoreService {
   }
 
   async getUserCount(): Promise<number> {
-    const querySnapshot = await getDocs(collection(this.db, "users"));
-    return querySnapshot.size; // Returns the count of documents in the collection
+    const querySnapshot = await getDocs(collection(this.db, this.dbName));
+    return querySnapshot.size;
   }
 
   public observeUserCount(updateCallback: (count: number) => void): void {
-    const q = query(collection(this.db, "users"));
+    const q = query(collection(this.db, this.dbName));
     
     onSnapshot(q, querySnapshot => {
-      updateCallback(querySnapshot.size); // Execute callback with the new count
+      updateCallback(querySnapshot.size);
     }, error => {
       console.error("Error observing user count: ", error);
     });
@@ -48,7 +52,7 @@ export class FirestoreService {
 
   public observeUserCount2(): Observable<{ total: number, present: number }> {
     return new Observable(observer => {
-      const q = query(collection(this.db, "users"));
+      const q = query(collection(this.db, this.dbName));
       
       const unsubscribe = onSnapshot(q, querySnapshot => {
         let total = 0;
@@ -61,12 +65,11 @@ export class FirestoreService {
           }
         });
   
-        observer.next({ total, present }); // Emit both counts
+        observer.next({ total, present });
       }, error => {
-        observer.error(error); // Emit any errors
+        observer.error(error);
       });
   
-      // Return the unsubscribe function for cleanup
       return { unsubscribe };
     });
   }
