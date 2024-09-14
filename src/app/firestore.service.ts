@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class FirestoreService {
   private db = getFirestore(initializeApp(firebaseConfig));
-  private isTest = false;
+  private isTest = true;
   private dbName = this.isTest ?  'users-test' : 'users';
 
 

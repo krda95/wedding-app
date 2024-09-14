@@ -10,6 +10,7 @@
       <a href="#section1" (click)="scrollToSection($event, 'section1')">Organizacja</a>
       <a href="#section2" (click)="scrollToSection($event, 'section2')">Harmonogram</a>
       <a href="#section3" (click)="scrollToSection($event, 'section3')">Formularz</a>
+      <a href="#section4" (click)="scrollToSection($event, 'section4')">Playlista</a>
     </nav>
   </div>
   <div class="cover">
@@ -89,6 +90,7 @@
     <p-knob [(ngModel)]="presentCount" valueColor="#0047AB" [readonly]="true" [max]="userCount"></p-knob>
     <div style="color: #6c757d">Zgłoszeni goście</div>
   </div>
+  
   <div id="section3" class="section form">
     <form [formGroup]="userForm" (ngSubmit)="confirm()">
       <div class="p-fluid">
@@ -150,5 +152,10 @@
       </div>
     </form>
     
+  </div>
+  <div id="section4" class="section">
+    <div class="h2">Playlista</div>
+    <div class="form-description" style="padding-bottom: 10px;">Zależy nam abyś się dobrze bawił, dlatego pomóż nam stworzyć listę utworów do współnej zabawy!</div>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0wq4ENZ6OrlSnZ7B9KHYQX?utm_source=generator" width="80%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
 </div>
