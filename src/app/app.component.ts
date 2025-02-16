@@ -23,6 +23,7 @@ import { MessageService } from 'primeng/api';
 
 import { MapComponentComponent } from './map-component/map-component.component';
 import { Subscription } from 'rxjs';
+import { InvitationComponent } from './invitation/invitation.component';
 
 
 interface EventItem {
@@ -67,6 +68,7 @@ interface MapItem {
     ,KeyFilterModule
     ,ConfirmDialogModule
     ,ToastModule
+    ,InvitationComponent
   ],
   providers: [
     ConfirmationService,

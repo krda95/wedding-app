@@ -1,0 +1,61 @@
+.invitation {
+    background-image: url('/assets/zapro_cover.JPG');
+    background-repeat: no-repeat;
+    background-position: center; 
+    height: 500px;
+    width: 300px;
+    background-size: cover;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.content {
+    backdrop-filter: blur(5px);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.407);
+    margin: 0px 20px;
+    width: fit-content;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: small;
+
+    span {
+        color: rgba(187, 187, 187, 0.705);
+    }
+
+}
+
+.looksDisabled {
+    cursor:not-allowed;
+}
+
+.bordered { 
+    border-left: 2px solid rgba(187, 187, 187, 0.705);
+    content: ''; 
+    height: 50px;
+    margin-top: 17px;
+} 
+
+.details {
+    font-size: medium;
+    color: rgb(187, 187, 187);
+}
