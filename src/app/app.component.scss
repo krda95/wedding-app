@@ -504,6 +504,24 @@ html {
       transition: background-color 0.3s ease;
       cursor: pointer;
   }
+
+  .apple-music {
+    background-color: #FB556D;
+    color: white !important;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.apple-music:hover {
+  background-color: #FB2944;
+}
   
   .spotify-button:hover {
       background-color: #1ed760;

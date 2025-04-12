@@ -20,7 +20,7 @@
   <div class="date">09.05.2025</div>
   <div class="countdown-container">
     <div class="h2">Do ślubu zostało:</div>
-    <div class="countdown-area">
+    <div *ngIf="countdown!.difference > 0;else inProgress" class="countdown-area">
       <div class="countdown">
         <div class="orange-rectangle">{{ countdown?.days }} dni</div>
         <div class="countdown-segment">
@@ -36,6 +36,12 @@
         </div>
       </div>
     </div>
+    <ng-template #inProgress>
+      <div *ngIf="countdown!.days < -1 || countdown!.hours < -8" class="h2">Ślub odbył się 09.05.2025 o 18:00</div>
+      <div *ngIf="countdown!.days === -1 && countdown!.hours > -8" class="h2">
+        Zabawa trwa 🥳
+      </div>
+    </ng-template>
   </div>
   <div class="description">
     Kochani, z ogromną radością zapraszamy Was na nasz Ślub i Wesele, które odbędą się w Nafplio w Grecji. Poniżej znajdziecie filmik oraz kilka informacji organizacyjnych, które pomogą Wam rozwiać wszelkie wątpliwości i przybliżyć nasz plan.
@@ -164,6 +170,12 @@
               alt="Spotify" 
               class="spotify-icon" 
               width="20">Otwórz na Spotify
+        </a>
+        <div class="form-description">lub na</div>
+      <a href="https://music.apple.com/pl/playlist/%C5%9Blub-dajewskich-playlist/pl.u-2aoqXVLfNm6jgg?a=join&it=gEVZ6K7Sqr0kQQU3Qx8l" 
+        target="_blank" 
+        class="apple-music">
+         Music
         </a>
       <iframe style="border-radius:12px; margin: 10px;" src="https://open.spotify.com/embed/playlist/0wq4ENZ6OrlSnZ7B9KHYQX?utm_source=generator" width="80%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="auto"></iframe>
     </div>

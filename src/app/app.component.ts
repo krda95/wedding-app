@@ -88,7 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
   desktopImg = "assets/desktop-wedding.png"
   mobileImg = "assets/mobile-wedding.png"
   
-  countdown: {days: number, hours: number, minutes: number, seconds: number} | undefined;
+  countdown: {difference: number, days: number, hours: number, minutes: number, seconds: number} | undefined;
   safeUrl: SafeHtml;
   userForm: FormGroup;
   userCount: number = 0;
@@ -170,9 +170,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const weddingDate = new Date('2025-05-09T16:00:00');
+    const weddingDate = new Date('2025-05-09T18:00:00');
     this.countdownService.countdownToDate(weddingDate).subscribe(countdown => {
       this.countdown = countdown;
+      if(this.countdown!.difference <= 0) {
+        this.userForm.disable();
+      }
     });
 
     this.countSub = this.firestoreService.observeUserCount2().subscribe({
