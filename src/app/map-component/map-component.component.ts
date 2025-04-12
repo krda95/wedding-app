@@ -1,5 +1,8 @@
 import { Component, OnInit, AfterViewInit, Input, SimpleChanges } from '@angular/core';
-import * as L from 'leaflet';
+// import * as L from 'leaflet';
+declare var L:any;
+import 'leaflet';
+import 'leaflet-routing-machine';
 
 @Component({
   selector: 'app-map-component',
@@ -90,6 +93,97 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
 
       this.markers = [weddingMarker, hotelMarker, integrationMarker, airportMarker]
       this.fitBoundsToMarkers()
+
+      L.Routing.control({
+        waypoints: [
+          L.latLng(AIRPORT_LATITUDE, AIRPORT_LONGITUDE),
+          L.latLng(HOTEL_LATITUDE, HOTEL_LONGITUDE)
+        ],
+        createMarker: () => null,
+        addWaypoints: false,
+        routeWhileDragging: false,
+        draggableWaypoints: false,
+        show: false,
+        fitSelectedRoutes: false,
+        router: L.Routing.osrmv1({
+          serviceUrl: 'https://router.project-osrm.org/route/v1'
+        }),
+        routeLine: function(route: any) {
+          const line = L.Routing.line(route, {
+            addWaypoints: false,
+            extendToWaypoints: false,
+            missingRouteTolerance: 0,
+            styles: [{ color: '#2196F3', weight: 3 }]
+          });
+
+          line.getLayers().forEach((layer: any) => {
+            if (layer instanceof L.Polyline) {
+              layer.on('mouseover', function(e: any) {
+                layer.bindTooltip('Trasa z lotniska do hotelu ≈ 2h', {
+                  permanent: false,
+                  direction: 'top'
+                }).openTooltip(e.latlng);
+              });
+              layer.on('mousemove', function(e: any) {
+                layer.openTooltip(e.latlng);
+              });
+              layer.on('mouseout', function() {
+                layer.closeTooltip();
+              });
+            }
+          });
+
+          return line;
+        }
+      }).addTo(this.map);
+
+      L.Routing.control({
+        waypoints: [
+          L.latLng(HOTEL_LATITUDE, HOTEL_LONGITUDE),
+          L.latLng(WEDDING_LATITUDE, WEDDING_LONGITUDE)
+        ],
+        createMarker: () => null,
+        addWaypoints: false,
+        routeWhileDragging: false,
+        draggableWaypoints: false,
+        show: false,
+        fitSelectedRoutes: false,
+        router: L.Routing.osrmv1({
+          serviceUrl: 'https://router.project-osrm.org/route/v1'
+        }),
+        routeLine: function(route: any) {
+          const line = L.Routing.line(route, {
+            addWaypoints: false,
+            extendToWaypoints: false,
+            missingRouteTolerance: 0,
+            styles: [{ color: '#FF3B30', weight: 3 }]
+          });
+
+          line.getLayers().forEach((layer: any) => {
+            if (layer instanceof L.Polyline) {
+              layer.on('mouseover', function(e: any) {
+                layer.bindTooltip('Trasa z hotelu do willi ≈ 10 min.', {
+                  permanent: false,
+                  direction: 'top'
+                }).openTooltip(e.latlng);
+              });
+              layer.on('mousemove', function(e: any) {
+                layer.openTooltip(e.latlng);
+              });
+              layer.on('mouseout', function() {
+                layer.closeTooltip();
+              });
+            }
+          });
+
+          return line;
+        }
+      }).addTo(this.map);
+
+      setTimeout(() => {
+        document.querySelectorAll('.leaflet-routing-container, .leaflet-routing-alternatives-container')
+          .forEach(el => el.remove());
+      }, 0);
 
   }
   ngOnInit(): void {
