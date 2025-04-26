@@ -41,8 +41,8 @@ export class MapComponentComponent implements OnInit, AfterViewInit {
     const WEDDING_LONGITUDE = 22.73120;
     const HOTEL_LATITUDE = 37.56610;
     const HOTEL_LONGITUDE = 22.79490;
-    const INTEGRATION_LATITUDE = 37.5695801;
-    const INTEGRATION_LONGITUDE = 22.8037386;
+    const INTEGRATION_LATITUDE = 37.567200;
+    const INTEGRATION_LONGITUDE = 22.798483;
     const AIRPORT_LATITUDE = 37.9350;
     const AIRPORT_LONGITUDE = 23.9495;
     

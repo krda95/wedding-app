@@ -115,7 +115,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.events = [
       { status: 'Zameldowanie w hotelu', date: '08/05/2025 14:00', icon: 'hotel', color: '#0047AB', image: 'reception.png', text: "Gotowi na niezapomniane chwile - zameldowanie na recepcji!" },
       { status: 'Poznajmy się', date: '08/05/2025 18:00', icon: 'liquor', color: '#0047AB', image: 'fun.png', text: "Dla tych którzy jeszcze się nie poznali będzie to okazja na integrację, a Ci którzy już się znają będą mogli po prostu napić się wina w dobrym towarzystwie." },
-      { status: 'Ceremonia & Wesele', date: '09/05/2025 17:00', icon: 'nightlife', color: '#0047AB', image: 'wedding.png', text: "Zarówno Ślub jak i Wesele odbędą się w Villi Merika. O godzinie i transporcie jeszcze Was poinformujemy." },
+      { status: 'Ceremonia & Wesele', date: '09/05/2025 18:00', icon: 'nightlife', color: '#0047AB', image: 'wedding.png', text: "Zarówno Ślub jak i Wesele odbędą się w Villi Merika. O godzinie i transporcie jeszcze Was poinformujemy." },
       { status: 'Śniadanie', date: '10/05/2025 10:00', icon: 'restaurant', color: '#0047AB', image: 'breakfast.png', text: "Śniadanie to najważniejszy posiłek dnia, wiec nie zapomnijcie o nim. Tym bardziej po zbyt dużej ilości wina ;)" },
       { status: 'Check out', date: '10/05/2025 12:00', icon: 'waving_hand', color: '#0047AB', image: 'bye.png', text: "Pożegnanie z uśmiechem - podziękowania za wspólnie spędzony, magiczny czas!" },
     ];
@@ -123,7 +123,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mapItems = [
       { icon: 'assets/willa.png', name: 'Villa weselna', description: 'Villa Merika', address: 'Epar.Od. Kiveriou - Astrous, Kato Vervena 220 01', google:'https://www.google.com/maps/place//data=!4m2!3m1!1s0x149fe6de46520389:0x96700dcb2db88ac2?sa=X&ved=1t:8290&ictx=111', url: 'https://villamerika.gr/', lat: 37.50180, long: 22.73120},
       { icon: 'assets/hotel.png', name: 'Hotel', description: 'Nafplio Hotel Ippoliti', url: 'https://www.ippoliti.gr/', lat: 37.56610, long: 22.79490 , address: 'Ilia Miniati 9, Nafplio', google: 'https://www.google.com/maps/place/Hotel+Ippoliti/@37.5663875,22.7926116,17z/data=!3m1!4b1!4m9!3m8!1s0x149ffa96517745fd:0x60e09df80cd1b9c6!5m2!4m1!1i2!8m2!3d37.5663833!4d22.7951865!16s%2Fg%2F1vf_2x3p?entry=ttu'},
-      { icon: 'assets/integracja.png', name: 'Integracja', extension: '"Poznajmy się"', description: 'Szczegóły wkrótce...', lat: 37.5695801, long: 22.8037386},
+      { icon: 'assets/integracja.png', name: 'Integracja', description: 'The Nest (Folia)', url: 'https://www.discovernafplio.gr/en/listings/taverns/nest-folia', lat: 37.567200, long: 22.798483, address: 'Boumpoulinas 61, Nafplio', google: 'https://www.google.com/maps/place/The+Nest/@37.567235,22.795651,814m/data=!3m2!1e3!4b1!4m6!3m5!1s0x149ffb3ed7560541:0x7f18418381f865b0!8m2!3d37.5672308!4d22.7982313!16s%2Fg%2F11h55n5vdj?hl=pl&entry=ttu&g_ep=EgoyMDI1MDQyMy4wIKXMDSoASAFQAw%3D%3D'},
       { icon: 'assets/lotnisko.png', name: 'Lotnisko', description: 'Port Lotniczy Ateny', url: 'https://www.aia.gr/traveler/', address: 'Attiki Odos, Spata 190 04', google:'https://www.google.pl/maps/place/Port+lotniczy+Ateny/@37.9362142,23.945476,17z/data=!3m1!4b1!4m6!3m5!1s0x14a1901ad9e75c61:0x38b215df0aeeb3aa!8m2!3d37.9362142!4d23.9480509!16zL20vMGQyMHM?entry=ttu', lat: 37.9350, long: 23.9495},
     ]
   }
